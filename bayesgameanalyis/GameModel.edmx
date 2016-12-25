@@ -1,0 +1,156 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="bayessportanalysisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="temperatura" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="padaline" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="visina_snijega" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="vjetar" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="igrati" Type="bit" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="datum" Type="date" />
+          <Property Name="domacin" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="gost" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="rezultat" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="domacin_niz" Type="int" Nullable="false" />
+          <Property Name="gost_niz" Type="int" Nullable="false" />
+          <Property Name="pobjede_domacin" Type="int" Nullable="false" />
+          <Property Name="pobjede_gost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" Nullable="false" />
+          <Property Name="kratica" Type="nchar" MaxLength="10" />
+          <Property Name="polozaj_ljestvica" Type="int" />
+          <Property Name="ime_momcadi" Type="nvarchar" MaxLength="50" />
+        </EntityType>
+        <EntityContainer Name="bayessportanalysisModelStoreContainer">
+          <EntitySet Name="Conditions" EntityType="Self.Conditions" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="bayessportanalysisModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="Games">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="datum" Type="DateTime" Precision="0" />
+          <Property Name="domacin" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="gost" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="rezultat" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="domacin_niz" Type="Int32" Nullable="false" />
+          <Property Name="gost_niz" Type="Int32" Nullable="false" />
+          <Property Name="pobjede_domacin" Type="Int32" Nullable="false" />
+          <Property Name="pobjede_gost" Type="Int32" Nullable="false" />
+        </EntityType>
+        <EntityContainer Name="bayessportanalysisEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Games" EntityType="Self.Games" />
+          <EntitySet Name="Teams" EntityType="bayessportanalysisModel.Teams" />
+          <EntitySet Name="Conditions" EntityType="bayessportanalysisModel.Conditions" />
+        </EntityContainer>
+        <EntityType Name="Teams">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="kratica" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="polozaj_ljestvica" Type="Int32" />
+          <Property Name="ime_momcadi" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Conditions">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" />
+          <Property Name="temperatura" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="padaline" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="visina_snijega" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="igrati" Type="Boolean" Nullable="false" />
+          <Property Name="vjetar" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="bayessportanalysisModelStoreContainer" CdmEntityContainer="bayessportanalysisEntities">
+          <EntitySetMapping Name="Games">
+            <EntityTypeMapping TypeName="bayessportanalysisModel.Games">
+              <MappingFragment StoreEntitySet="Games">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="datum" ColumnName="datum" />
+                <ScalarProperty Name="domacin" ColumnName="domacin" />
+                <ScalarProperty Name="gost" ColumnName="gost" />
+                <ScalarProperty Name="rezultat" ColumnName="rezultat" />
+                <ScalarProperty Name="domacin_niz" ColumnName="domacin_niz" />
+                <ScalarProperty Name="gost_niz" ColumnName="gost_niz" />
+                <ScalarProperty Name="pobjede_domacin" ColumnName="pobjede_domacin" />
+                <ScalarProperty Name="pobjede_gost" ColumnName="pobjede_gost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Teams">
+            <EntityTypeMapping TypeName="bayessportanalysisModel.Teams">
+              <MappingFragment StoreEntitySet="Teams">
+                <ScalarProperty Name="ime_momcadi" ColumnName="ime_momcadi" />
+                <ScalarProperty Name="polozaj_ljestvica" ColumnName="polozaj_ljestvica" />
+                <ScalarProperty Name="kratica" ColumnName="kratica" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Conditions">
+            <EntityTypeMapping TypeName="bayessportanalysisModel.Conditions">
+              <MappingFragment StoreEntitySet="Conditions">
+                <ScalarProperty Name="vjetar" ColumnName="vjetar" />
+                <ScalarProperty Name="igrati" ColumnName="igrati" />
+                <ScalarProperty Name="visina_snijega" ColumnName="visina_snijega" />
+                <ScalarProperty Name="padaline" ColumnName="padaline" />
+                <ScalarProperty Name="temperatura" ColumnName="temperatura" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

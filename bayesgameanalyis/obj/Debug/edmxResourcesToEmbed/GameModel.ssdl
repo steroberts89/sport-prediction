@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="bayessportanalysisModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012.Azure" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Conditions">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="temperatura" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="padaline" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="visina_snijega" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="vjetar" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="igrati" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Games">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="datum" Type="date" />
+    <Property Name="domacin" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="gost" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="rezultat" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="domacin_niz" Type="int" Nullable="false" />
+    <Property Name="gost_niz" Type="int" Nullable="false" />
+    <Property Name="pobjede_domacin" Type="int" Nullable="false" />
+    <Property Name="pobjede_gost" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Teams">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="int" Nullable="false" />
+    <Property Name="kratica" Type="nchar" MaxLength="10" />
+    <Property Name="polozaj_ljestvica" Type="int" />
+    <Property Name="ime_momcadi" Type="nvarchar" MaxLength="50" />
+  </EntityType>
+  <EntityContainer Name="bayessportanalysisModelStoreContainer">
+    <EntitySet Name="Conditions" EntityType="Self.Conditions" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Games" EntityType="Self.Games" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Teams" EntityType="Self.Teams" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
