@@ -14,3 +14,6 @@ C:\Users\Bruno\Source\bayesgameanalyis\bayesgameanalyis\obj\Debug\bayesgameanaly
 C:\Users\Bruno\Source\bayesgameanalyis\bayesgameanalyis\obj\Debug\bayesgameanalyis.StartView.resources
 C:\Users\Bruno\Source\bayesgameanalyis\bayesgameanalyis\obj\Debug\bayesgameanalyis.WeatherLearning.resources
 C:\Users\Bruno\Source\bayesgameanalyis\bayesgameanalyis\obj\Debug\bayesgameanalyis.csprojResolveAssemblyReference.cache
+C:\Users\Bruno\Source\Repos\bayes_analysis\bayesgameanalyis\bin\Debug\bayesgameanalyis.exe.config
+C:\Users\Bruno\Source\Repos\bayes_analysis\bayesgameanalyis\obj\Debug\bayesgameanalyis.exe
+C:\Users\Bruno\Source\Repos\bayes_analysis\bayesgameanalyis\obj\Debug\bayesgameanalyis.pdb
