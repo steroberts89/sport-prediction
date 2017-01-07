@@ -22,20 +22,38 @@ namespace bayesgameanalyis
 
         protected override void OnLoad(EventArgs e)
         {
-            base.OnLoad(e);
-            db = new bayessportanalysisEntities();
+            try
+            {
+                base.OnLoad(e);
+                db = new bayessportanalysisEntities();
+                db.Conditions.Load();
+                db.Games.Load();
+                db.Teams.Load();
+            }
+            catch (Exception)
+            {
+                if(MessageBox.Show("Dogodila se greška kod dohvaćanja podataka iz baze, provjeriti internet vezu ili "+
+                    "kontaktirati bruno.blazeka@fer.hr. Ponovno pokrenuti?",
+                    "Greška kod dohvaćanja baze",MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+                {
+                    Application.Restart();
+                }
+                else
+                {
+                    this.Close();
+                }
+            }
         }
 
         protected override void OnClosing(CancelEventArgs e)
         {
             base.OnClosing(e);
-            this.db.Dispose();
+            db.Dispose();
         }
 
         private void WeatherButton_Click(object sender, EventArgs e)
         {
             LabelVisible = true;
-            db.Conditions.Load();
             var weatherForm = new WeatherLearning(db);
             weatherForm.Show();
         }
@@ -43,8 +61,6 @@ namespace bayesgameanalyis
         private void ScoreButton_Click(object sender, EventArgs e)
         {
             LabelVisible = true;
-            db.Games.Load();
-            db.Teams.Load();
             var scoreForm = new GamePrediction(db);
             scoreForm.Show();
         }
@@ -53,11 +69,11 @@ namespace bayesgameanalyis
         {
             get
             {
-                return this.LoadingLabel.Visible;
+                return LoadingLabel.Visible;
             }
             set
             {
-                this.LoadingLabel.Visible = value;
+                LoadingLabel.Visible = value;
             }
         }
     }

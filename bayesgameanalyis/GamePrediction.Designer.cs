@@ -40,12 +40,12 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.probabilities = new System.Windows.Forms.Label();
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // homeCombobox
             // 
+            this.homeCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.homeCombobox.FormattingEnabled = true;
             this.homeCombobox.Location = new System.Drawing.Point(3, 18);
             this.homeCombobox.Name = "homeCombobox";
@@ -54,6 +54,7 @@
             // 
             // awayCombobox
             // 
+            this.awayCombobox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.awayCombobox.FormattingEnabled = true;
             this.awayCombobox.Location = new System.Drawing.Point(3, 58);
             this.awayCombobox.Name = "awayCombobox";
@@ -162,28 +163,16 @@
             this.label1.Text = "Domacin";
             this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
             // 
-            // probabilities
-            // 
-            this.probabilities.AutoSize = true;
-            this.probabilities.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.probabilities.Location = new System.Drawing.Point(18, 144);
-            this.probabilities.Name = "probabilities";
-            this.probabilities.Size = new System.Drawing.Size(51, 20);
-            this.probabilities.TabIndex = 9;
-            this.probabilities.Text = "label4";
-            this.probabilities.Visible = false;
-            // 
-            // Form1
+            // GamePrediction
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(370, 319);
-            this.Controls.Add(this.probabilities);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.overallResult);
             this.Controls.Add(this.button1);
-            this.Name = "Form1";
-            this.Text = "Form1";
+            this.Name = "GamePrediction";
+            this.Text = "Predvidi rezultat";
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
@@ -204,7 +193,6 @@
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label probabilities;
         public System.Windows.Forms.Button button1;
     }
 }

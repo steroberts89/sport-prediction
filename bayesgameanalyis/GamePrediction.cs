@@ -42,12 +42,12 @@ namespace bayesgameanalyis
             var gamesList = new List<Games>();
             if (homeWins.Text == "" || homeForm.Text == "" || awayForm.Text == "" || awayWins.Text == "")
             {
-                MessageBox.Show("Not enough data");
+                MessageBox.Show("Nedovoljno unesenih podataka");
                 return;
             }
             if (homeCombobox.SelectedIndex.Equals(awayCombobox.SelectedIndex))
             {
-                MessageBox.Show("You selected "+ (homeCombobox.SelectedValue).ToString().Trim() +" twice, teams have to be different.");
+                MessageBox.Show("Odabrali ste "+ (homeCombobox.SelectedValue).ToString().Trim() +" dvaput.");
             }
             else
             {
@@ -68,11 +68,9 @@ namespace bayesgameanalyis
             var host = games.FirstOrDefault().domacin;
             var guest = games.FirstOrDefault().gost;
             var bayesresult = bayes(host,guest,games);
-            probabilities.Visible = true;
-            probabilities.Text = "Prob home: " + bayesresult.Item1 + ",\n prob away: " + bayesresult.Item2;
             overallResult.Visible = true;
             overallResult.Text = ( (bayesresult.Item1 > bayesresult.Item2) ? host.Trim() : guest.Trim() ) 
-                + " će pobjediti s vjerojatnošću: " + returnFormatted(bayesresult.Item1, bayesresult.Item2);
+                + " ce pobjediti s vjerojatnoscu: " + returnFormatted(bayesresult.Item1, bayesresult.Item2);
         }
 
         private Tuple<double, double> bayes(string host, string guest, List<Games> games)

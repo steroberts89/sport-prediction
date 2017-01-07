@@ -42,6 +42,7 @@
             // 
             // tempComboBox
             // 
+            this.tempComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.tempComboBox.FormattingEnabled = true;
             this.tempComboBox.Location = new System.Drawing.Point(85, 51);
             this.tempComboBox.Name = "tempComboBox";
@@ -50,6 +51,7 @@
             // 
             // fallingComboBox
             // 
+            this.fallingComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.fallingComboBox.FormattingEnabled = true;
             this.fallingComboBox.Location = new System.Drawing.Point(85, 78);
             this.fallingComboBox.Name = "fallingComboBox";
@@ -58,6 +60,7 @@
             // 
             // snowComboBox
             // 
+            this.snowComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.snowComboBox.FormattingEnabled = true;
             this.snowComboBox.Location = new System.Drawing.Point(85, 105);
             this.snowComboBox.Name = "snowComboBox";
@@ -66,6 +69,7 @@
             // 
             // windComboBox
             // 
+            this.windComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.windComboBox.FormattingEnabled = true;
             this.windComboBox.Location = new System.Drawing.Point(85, 132);
             this.windComboBox.Name = "windComboBox";
@@ -146,7 +150,7 @@
             this.Controls.Add(this.fallingComboBox);
             this.Controls.Add(this.tempComboBox);
             this.Name = "WeatherLearning";
-            this.Text = "WeatherLearning";
+            this.Text = "Igrati ili ne";
             this.ResumeLayout(false);
             this.PerformLayout();
 
