@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.homeCombobox = new System.Windows.Forms.ComboBox();
             this.awayCombobox = new System.Windows.Forms.ComboBox();
             this.button1 = new System.Windows.Forms.Button();
@@ -40,6 +41,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
+            this.bayesToolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -87,6 +89,7 @@
             this.homeWins.Name = "homeWins";
             this.homeWins.Size = new System.Drawing.Size(100, 20);
             this.homeWins.TabIndex = 4;
+            this.bayesToolTip.SetToolTip(this.homeWins, "Unesite broj pobjeda domaće momčadi");
             // 
             // homeForm
             // 
@@ -94,6 +97,7 @@
             this.homeForm.Name = "homeForm";
             this.homeForm.Size = new System.Drawing.Size(100, 20);
             this.homeForm.TabIndex = 5;
+            this.bayesToolTip.SetToolTip(this.homeForm, "Unesite zadnji niz rezultata domaće momčadi (- ispred niza poraza)");
             // 
             // awayWins
             // 
@@ -101,6 +105,7 @@
             this.awayWins.Name = "awayWins";
             this.awayWins.Size = new System.Drawing.Size(100, 20);
             this.awayWins.TabIndex = 6;
+            this.bayesToolTip.SetToolTip(this.awayWins, "Unesite broj pobjeda u sezoni");
             // 
             // awayForm
             // 
@@ -108,6 +113,7 @@
             this.awayForm.Name = "awayForm";
             this.awayForm.Size = new System.Drawing.Size(100, 20);
             this.awayForm.TabIndex = 7;
+            this.bayesToolTip.SetToolTip(this.awayForm, "Unesite zadnji niz rezultata gostujuće momčadi (- ispred niza poraza)");
             // 
             // tableLayoutPanel1
             // 
@@ -194,6 +200,7 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         public System.Windows.Forms.Button button1;
+        private System.Windows.Forms.ToolTip bayesToolTip;
     }
 }
 

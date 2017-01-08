@@ -22,13 +22,14 @@ namespace bayesgameanalyis
 
         public GamePrediction(bayessportanalysisEntities entities)
         {
+
             InitializeComponent();
             db = entities;
 
             // Call the Load method to get the data for the given DbSet 
             // from the database. 
             // The data is materialized as entities. The entities are managed by 
-            // the DbContext instance. 
+            // the DbContext instance.
             homeCombobox.DataSource = db.Games.Select(t => t.domacin).Distinct().ToList();
             //(homeCombobox.DataSource as List<string>).ForEach(t => t.Trim());
             awayCombobox.DataSource = db.Games.Select(t => t.gost).Distinct().ToList();
@@ -69,8 +70,16 @@ namespace bayesgameanalyis
             var guest = games.FirstOrDefault().gost;
             var bayesresult = bayes(host,guest,games);
             overallResult.Visible = true;
-            overallResult.Text = ( (bayesresult.Item1 > bayesresult.Item2) ? host.Trim() : guest.Trim() ) 
+            if(Double.IsNaN(bayesresult.Item1) || Double.IsNaN(bayesresult.Item2))
+            {
+                overallResult.Text = "Ne mogu izračunati traženi rezultat.";
+            }
+            else
+            {
+                overallResult.Text = ((bayesresult.Item1 > bayesresult.Item2) ? host.Trim() : guest.Trim())
                 + " ce pobjediti s vjerojatnoscu: " + returnFormatted(bayesresult.Item1, bayesresult.Item2);
+            }
+            
         }
 
         private Tuple<double, double> bayes(string host, string guest, List<Games> games)

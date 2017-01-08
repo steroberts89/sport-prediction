@@ -38,6 +38,7 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.result = new System.Windows.Forms.Label();
+            this.explanationLabel = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // tempComboBox
@@ -109,9 +110,9 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(12, 108);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(36, 13);
+            this.label3.Size = new System.Drawing.Size(71, 13);
             this.label3.TabIndex = 7;
-            this.label3.Text = "Snijeg";
+            this.label3.Text = "Visina snijega";
             this.label3.Click += new System.EventHandler(this.label3_Click);
             // 
             // label4
@@ -134,11 +135,21 @@
             this.result.Text = "label5";
             this.result.Visible = false;
             // 
+            // explanationLabel
+            // 
+            this.explanationLabel.Location = new System.Drawing.Point(13, 13);
+            this.explanationLabel.Name = "explanationLabel";
+            this.explanationLabel.Size = new System.Drawing.Size(259, 35);
+            this.explanationLabel.TabIndex = 10;
+            this.explanationLabel.Text = "Koristeći ovo sučelje saznajte jesu li vremenske prilike pogodne za zimski sport " +
+    "na prirodnom ledu";
+            // 
             // WeatherLearning
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(284, 261);
+            this.Controls.Add(this.explanationLabel);
             this.Controls.Add(this.result);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -168,5 +179,6 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label result;
+        private System.Windows.Forms.Label explanationLabel;
     }
 }
