@@ -9,4 +9,13 @@
     <PackageReference Include="Microsoft.ML" Version="0.10.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <None Update="ana.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="eval.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
 </Project>
