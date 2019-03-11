@@ -8,7 +8,8 @@ namespace SportPredictor
         static void Main(string[] args)
         {
             Classifier classifier = new Classifier();
-            classifier.Evaluate();
+            classifier.Check();
+            Console.ReadLine();
         }
     }
 }

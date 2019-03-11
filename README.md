@@ -2,6 +2,10 @@
 
 Currently refactoring to implement ML.net on sport prediction
 
+## Links
+
+Data endpoint: https://gitlab.com/dword4/nhlapi/blob/master/stats-api.md
+
 ## Previously
 
 ### Windows desktop application made to apply Naive Bayes Classifier on sport results

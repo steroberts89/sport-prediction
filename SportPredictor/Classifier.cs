@@ -1,4 +1,5 @@
 ﻿using System;
+using Microsoft.ML.Data;
 using Microsoft.Data.DataView;
 using Microsoft.ML;
 using Microsoft.ML.Core.Data;
@@ -23,7 +24,7 @@ namespace SportPredictor
 
             // If working in Visual Studio, make sure the 'Copy to Output Directory'
             // property of data.txt is set to 'Copy always'
-            IDataView trainingDataView = _mlContext.Data.ReadFromTextFile<GameData>(path: "ana.txt", hasHeader: false, separatorChar: ',');
+            IDataView trainingDataView = _mlContext.Data.ReadFromEnumerable(DataHandler.GetGames("30", "2018-01-02", "2018-06-02"));
 
             // STEP 3: Transform your data and add a learner
             // Assign numeric values to text in the "Label" column, because only
@@ -32,8 +33,7 @@ namespace SportPredictor
             // Convert the Label back into original text (after converting to number in step 3)
             var pipeline = _mlContext.Transforms.Conversion.MapValueToKey("Label")
                 .Append(_mlContext.Transforms.Concatenate("Features",
-                "TeamShots", "OpponentShots", "TeamPPG", "OpponentPPG",
-                "TeamSHG", "OpponentSHG", "TeamPP", "OpponentPP", "TeamPIM", "OpponentPIM"))
+                "HomeWins", "HomeLosses", "HomeOT", "AwayWins", "AwayLosses", "AwayOT"))
                 .Append(_mlContext.MulticlassClassification.Trainers.StochasticDualCoordinateAscent(labelColumn: "Label", featureColumn: "Features"))
                 .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
@@ -41,21 +41,19 @@ namespace SportPredictor
             _trainedModel = pipeline.Fit(trainingDataView);
         }
 
-        public static void Check()
+        public void Check()
         {
             var prediction = _trainedModel.CreatePredictionEngine<GameData, GamePrediction>(_mlContext).Predict(
                 new GameData()
                 {
-                    TeamShots = 12,
-                    TeamPPG = 2,
-                    TeamPIM = 6,
-                    TeamPP = 3,
-                    TeamSHG = 0,
-                    OpponentShots = 60,
-                    OpponentPPG = 0,
-                    OpponentPIM = 6,
-                    OpponentPP = 3,
-                    OpponentSHG = 1
+                    Home = "20",
+                    Away = "25",
+                    HomeWins = 1,
+                    HomeLosses = 1,
+                    HomeOT = 1,
+                    AwayWins = 1,
+                    AwayLosses = 1,
+                    AwayOT = 1
                 });
 
             Console.WriteLine($"Predicted outcome: {prediction.PredictedLabels}");

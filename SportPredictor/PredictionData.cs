@@ -13,38 +13,22 @@ namespace SportPredictor
     public class GameData
     {
 
-        [LoadColumn(9)]
-        public float TeamShots;
+        public string Home { get; set; }
+        public float HomeWins { get; set; }
+        public float HomeLosses { get; set; }
+        public float HomeOT { get; set; }
+        public string Away { get; set; }
+        public float AwayWins { get; set; }
+        public float AwayLosses { get; set; }
+        public float AwayOT { get; set; }
+        public string Label { get; set; }
 
-        [LoadColumn(10)]
-        public float TeamPIM;
-
-        [LoadColumn(11)]
-        public float TeamPPG;
-
-        [LoadColumn(12)]
-        public float TeamPP;
-
-        [LoadColumn(13)]
-        public float TeamSHG;
-
-        [LoadColumn(15)]
-        public float OpponentShots;
-
-        [LoadColumn(16)]
-        public float OpponentPIM;
-
-        [LoadColumn(17)]
-        public float OpponentPPG;
-
-        [LoadColumn(18)]
-        public float OpponentPP;
-
-        [LoadColumn(19)]
-        public float OpponentSHG;
-
-        [LoadColumn(6)]
-        public string Label;
+        public override string ToString()
+        {
+            // converts to csv
+            return Home + "," + Away + "," + Label + "," + HomeWins + "," + HomeLosses + "," +
+                HomeOT + "," + AwayWins + "," + AwayLosses + "," + AwayOT;
+        }
     }
 
     // GamePrediction is the result returned from prediction operations
