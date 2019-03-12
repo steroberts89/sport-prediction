@@ -22,9 +22,8 @@ namespace SportPredictor
             // STEP 2: Create a ML.NET environment  
             _mlContext = new MLContext();
 
-            // If working in Visual Studio, make sure the 'Copy to Output Directory'
-            // property of data.txt is set to 'Copy always'
-            IDataView trainingDataView = _mlContext.Data.ReadFromEnumerable(DataHandler.GetGames("30", "2018-01-02", "2018-06-02"));
+            // Reading the data from the api
+            IDataView trainingDataView = _mlContext.Data.ReadFromEnumerable(DataHandler.GetGames("2017-01-02", "2017-12-02"));
 
             // STEP 3: Transform your data and add a learner
             // Assign numeric values to text in the "Label" column, because only
@@ -37,7 +36,8 @@ namespace SportPredictor
                 .Append(_mlContext.MulticlassClassification.Trainers.StochasticDualCoordinateAscent(labelColumn: "Label", featureColumn: "Features"))
                 .Append(_mlContext.Transforms.Conversion.MapKeyToValue("PredictedLabel"));
 
-            // STEP 4: Train your model based on the data set  
+            // STEP 4: Train your model based on the data set
+            Console.WriteLine("Training the model...");
             _trainedModel = pipeline.Fit(trainingDataView);
         }
 
@@ -62,7 +62,7 @@ namespace SportPredictor
         public void Evaluate()
         {
             //Load the test dataset into the IDataView
-            var testDataView = _mlContext.Data.ReadFromTextFile<GameData>(path: "eval.txt", hasHeader: false, separatorChar: ',');
+            var testDataView = _mlContext.Data.ReadFromEnumerable(DataHandler.GetGames("2018-01-02", "2018-12-02"));
 
             //Evaluate the model on a test dataset and calculate metrics of the model on the test data.
             var testMetrics = _mlContext.MulticlassClassification.Evaluate(_trainedModel.Transform(testDataView));

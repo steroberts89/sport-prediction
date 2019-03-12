@@ -22,13 +22,6 @@ namespace SportPredictor
         public float AwayLosses { get; set; }
         public float AwayOT { get; set; }
         public string Label { get; set; }
-
-        public override string ToString()
-        {
-            // converts to csv
-            return Home + "," + Away + "," + Label + "," + HomeWins + "," + HomeLosses + "," +
-                HomeOT + "," + AwayWins + "," + AwayLosses + "," + AwayOT;
-        }
     }
 
     // GamePrediction is the result returned from prediction operations
