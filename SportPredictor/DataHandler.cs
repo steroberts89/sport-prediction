@@ -6,11 +6,18 @@ namespace SportPredictor
 {
     public class DataHandler
     {
-        public static IEnumerable<GameData> GetGames(string start, string end)
+        private PredictionTypes _predictionType;
+
+        public DataHandler(PredictionTypes type)
+        {
+            _predictionType = type;
+        }
+
+        public IEnumerable<GameData> GetGames(string start, string end)
         {
             ApiHandler handler = new ApiHandler();
             string answer = handler.SendRequest(RequestBuilder(start,end));
-            return handler.ParseAnswer(answer);
+            return handler.ParseAnswer(answer,_predictionType);
         }
 
         public static string RequestBuilder(string start, string end)

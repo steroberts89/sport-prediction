@@ -5,7 +5,6 @@ using System.Text;
 
 namespace SportPredictor
 {
-    // STEP 1: Define your data structures
     // GameData is used to provide training data, and as
     // input for prediction operations
     // - First 4 properties are inputs/features used to predict the label
@@ -29,5 +28,11 @@ namespace SportPredictor
     {
         [ColumnName("PredictedLabel")]
         public string PredictedLabels;
+    }
+
+    public enum PredictionTypes
+    {
+        Binary = 0,
+        Multiclass = 1
     }
 }

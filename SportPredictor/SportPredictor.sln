@@ -1,9 +1,13 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.28307.136
+VisualStudioVersion = 15.0.27130.2027
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SportPredictor", "SportPredictor.csproj", "{E113B0F5-D13B-496A-B571-C83303FA2826}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Predictor", "..\Predictor\Predictor.csproj", "{48F886EB-9D37-4014-92CD-9D54906C2407}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Test", "..\Test\Test.csproj", "{28F0812F-7B77-42AD-BD6B-B3C6CF34D21B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +19,14 @@ Global
 		{E113B0F5-D13B-496A-B571-C83303FA2826}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E113B0F5-D13B-496A-B571-C83303FA2826}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E113B0F5-D13B-496A-B571-C83303FA2826}.Release|Any CPU.Build.0 = Release|Any CPU
+		{48F886EB-9D37-4014-92CD-9D54906C2407}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{48F886EB-9D37-4014-92CD-9D54906C2407}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{48F886EB-9D37-4014-92CD-9D54906C2407}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{48F886EB-9D37-4014-92CD-9D54906C2407}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28F0812F-7B77-42AD-BD6B-B3C6CF34D21B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28F0812F-7B77-42AD-BD6B-B3C6CF34D21B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28F0812F-7B77-42AD-BD6B-B3C6CF34D21B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28F0812F-7B77-42AD-BD6B-B3C6CF34D21B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

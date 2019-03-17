@@ -3,17 +3,20 @@ using Microsoft.ML.Data;
 using Microsoft.Data.DataView;
 using Microsoft.ML;
 using Microsoft.ML.Core.Data;
+using System.Collections.Generic;
+using SportPredictor.Models;
 
 namespace SportPredictor
 {
     public class Classifier
     {
         private static MLContext _mlContext;
-
+        private static DataHandler _dataHandler;
         private static ITransformer _trainedModel;
 
         public Classifier()
         {
+            _dataHandler = new DataHandler(PredictionTypes.Multiclass);
             Train();
         }
 
@@ -23,7 +26,7 @@ namespace SportPredictor
             _mlContext = new MLContext();
 
             // Reading the data from the api
-            IDataView trainingDataView = _mlContext.Data.ReadFromEnumerable(DataHandler.GetGames("2017-01-02", "2017-12-02"));
+            IDataView trainingDataView = _mlContext.Data.ReadFromEnumerable(_dataHandler.GetGames("2018-01-01", "2018-12-31"));
 
             // STEP 3: Transform your data and add a learner
             // Assign numeric values to text in the "Label" column, because only
@@ -41,7 +44,7 @@ namespace SportPredictor
             _trainedModel = pipeline.Fit(trainingDataView);
         }
 
-        public void Check()
+        public string Check()
         {
             var prediction = _trainedModel.CreatePredictionEngine<GameData, GamePrediction>(_mlContext).Predict(
                 new GameData()
@@ -56,25 +59,35 @@ namespace SportPredictor
                     AwayOT = 1
                 });
 
-            Console.WriteLine($"Predicted outcome: {prediction.PredictedLabels}");
+            return ($"Predicted outcome: {prediction.PredictedLabels}");
         }
 
-        public void Evaluate()
+        public string[] PredictDailyGames(string startDate, string endDate)
+        {
+            List<string> predictions = new List<string>();
+            var games = _dataHandler.GetGames(startDate, endDate);
+            foreach (var game in games)
+            {
+                predictions.Add(_trainedModel.CreatePredictionEngine<GameData, GamePrediction>(_mlContext).Predict(game).PredictedLabels);
+            }
+            return predictions.ToArray();
+        }
+
+        public Metrics Evaluate()
         {
             //Load the test dataset into the IDataView
-            var testDataView = _mlContext.Data.ReadFromEnumerable(DataHandler.GetGames("2018-01-02", "2018-12-02"));
+            var testDataView = _mlContext.Data.ReadFromEnumerable(_dataHandler.GetGames("2017-01-01", "2017-12-31"));
 
             //Evaluate the model on a test dataset and calculate metrics of the model on the test data.
             var testMetrics = _mlContext.MulticlassClassification.Evaluate(_trainedModel.Transform(testDataView));
 
-            Console.WriteLine($"*************************************************************************************************************");
-            Console.WriteLine($"*       Metrics for Multi-class Classification model - Test Data     ");
-            Console.WriteLine($"*------------------------------------------------------------------------------------------------------------");
-            Console.WriteLine($"*       MicroAccuracy:    {testMetrics.AccuracyMicro:0.###}");
-            Console.WriteLine($"*       MacroAccuracy:    {testMetrics.AccuracyMacro:0.###}");
-            Console.WriteLine($"*       LogLoss:          {testMetrics.LogLoss:#.###}");
-            Console.WriteLine($"*       LogLossReduction: {testMetrics.LogLossReduction:#.###}");
-            Console.WriteLine($"*************************************************************************************************************");
+            return new Metrics
+            {
+                MicroAccuracy = testMetrics.AccuracyMicro,
+                MacroAccuracy = testMetrics.AccuracyMacro,
+                LogLoss = testMetrics.LogLoss,
+                LogLossReduction = testMetrics.LogLossReduction
+            };
         }
     }
 }
