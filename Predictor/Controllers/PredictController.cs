@@ -24,6 +24,13 @@ namespace Predictor.Controllers
             return _classifier.Evaluate();
         }
 
+        // GET api/predict/table
+        [HttpGet]
+        public object Table(string startDate, string endDate)
+        {
+            return _classifier.PredictSeason(startDate,endDate);
+        }
+
         // GET api/predict/2019-03-15
         [HttpGet("{date}")]
         public string Get(string date)

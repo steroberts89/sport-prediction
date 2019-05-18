@@ -5,18 +5,22 @@ using Microsoft.ML;
 using Microsoft.ML.Core.Data;
 using System.Collections.Generic;
 using SportPredictor.Models;
+using SportPredictor.Handlers;
+using System.Linq;
 
 namespace SportPredictor
 {
     public class Classifier
     {
         private static MLContext _mlContext;
-        private static DataHandler _dataHandler;
+        private static PredictionHandler _predictionHandler;
+        private static TeamHandler _teamHandler;
         private static ITransformer _trainedModel;
 
         public Classifier()
         {
-            _dataHandler = new DataHandler(PredictionTypes.Multiclass);
+            _predictionHandler = new PredictionHandler(PredictionTypes.Multiclass);
+            _teamHandler = new TeamHandler();
             Train();
         }
 
@@ -26,7 +30,7 @@ namespace SportPredictor
             _mlContext = new MLContext();
 
             // Reading the data from the api
-            IDataView trainingDataView = _mlContext.Data.ReadFromEnumerable(_dataHandler.GetGames("2018-01-01", "2018-12-31"));
+            IDataView trainingDataView = _mlContext.Data.ReadFromEnumerable(_predictionHandler.GetGames("2017-09-30", "2018-05-31"));
 
             // STEP 3: Transform your data and add a learner
             // Assign numeric values to text in the "Label" column, because only
@@ -65,7 +69,7 @@ namespace SportPredictor
         public string[] PredictDailyGames(string startDate, string endDate)
         {
             List<string> predictions = new List<string>();
-            var games = _dataHandler.GetGames(startDate, endDate);
+            var games = _predictionHandler.GetGames(startDate, endDate);
             foreach (var game in games)
             {
                 predictions.Add(_trainedModel.CreatePredictionEngine<GameData, GamePrediction>(_mlContext).Predict(game).PredictedLabels);
@@ -73,10 +77,24 @@ namespace SportPredictor
             return predictions.ToArray();
         }
 
+        public IEnumerable<KeyValuePair<string,int>> PredictSeason(string startDate, string endDate)
+        {
+            Dictionary<string, int> table = new Dictionary<string, int>();
+            
+            var games = _predictionHandler.GetGames(startDate, endDate);
+            foreach (var game in games)
+            {
+                var home = _teamHandler.getTeamNameById(game.Home);
+                var away = _teamHandler.getTeamNameById(game.Away);
+                RegisterPoints(table, home, away, _trainedModel.CreatePredictionEngine<GameData, GamePrediction>(_mlContext).Predict(game).PredictedLabels);
+            }
+            return table.OrderByDescending(x => x.Value);
+        }
+
         public Metrics Evaluate()
         {
             //Load the test dataset into the IDataView
-            var testDataView = _mlContext.Data.ReadFromEnumerable(_dataHandler.GetGames("2017-01-01", "2017-12-31"));
+            var testDataView = _mlContext.Data.ReadFromEnumerable(_predictionHandler.GetGames("2017-01-01", "2017-12-31"));
 
             //Evaluate the model on a test dataset and calculate metrics of the model on the test data.
             var testMetrics = _mlContext.MulticlassClassification.Evaluate(_trainedModel.Transform(testDataView));
@@ -88,6 +106,51 @@ namespace SportPredictor
                 LogLoss = testMetrics.LogLoss,
                 LogLossReduction = testMetrics.LogLossReduction
             };
+        }
+
+        public void RegisterPoints(Dictionary<string,int> table,string home,string away,string result)
+        {
+            int homePoints = 0;
+            int awayPoints = 0;
+            if (result[result.Length - 1] == 'W')
+            {
+                if (result[0] == 'H')
+                {
+                    homePoints = 2;
+                }
+                else
+                {
+                    awayPoints = 2;
+                }
+            }
+            else
+            {
+                if (result[0] == 'H')
+                {
+                    homePoints = 2;
+                    awayPoints = 1;
+                }
+                else
+                {
+                    homePoints = 1;
+                    awayPoints = 2;
+                }
+            }
+            try
+            {
+                table[home] += homePoints;
+            } catch
+            {
+                table[home] = homePoints;
+            }
+            try
+            {
+                table[away] += awayPoints;
+            }
+            catch
+            {
+                table[away] = awayPoints;
+            }
         }
     }
 }

@@ -1,7 +1,4 @@
 ﻿using Microsoft.ML.Data;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace SportPredictor
 {
@@ -11,7 +8,6 @@ namespace SportPredictor
     // - Label is what you are predicting, and is only set when training
     public class GameData
     {
-
         public string Home { get; set; }
         public float HomeWins { get; set; }
         public float HomeLosses { get; set; }

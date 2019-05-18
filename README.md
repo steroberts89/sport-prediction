@@ -6,6 +6,11 @@ Currently refactoring to implement ML.net on sport prediction
 
 Data endpoint: https://gitlab.com/dword4/nhlapi/blob/master/stats-api.md
 
+## Future improvements
+
+- [] Use Yahoo Sports API
+- [] Add other sports
+
 ## Previously
 
 ### Windows desktop application made to apply Naive Bayes Classifier on sport results

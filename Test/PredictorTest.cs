@@ -24,6 +24,15 @@ namespace Test
         }
 
         [TestMethod]
+        public void TestSeasonPrediction()
+        {
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            var prediction = _classifier.PredictSeason("2018-09-15", "2019-05-15");
+            watch.Stop();
+            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
+        }
+
+        [TestMethod]
         public void TestEvaluationTimeAndPrecision()
         {
             var watch = System.Diagnostics.Stopwatch.StartNew();
