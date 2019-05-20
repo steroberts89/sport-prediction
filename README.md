@@ -3,11 +3,16 @@ Applying [ML.NET](https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet
 
 ## Currently implemented functionalities
 
-[x] Predict result of games
+- [x] **Predict result of games**
+
 After a model is trained for a certain period of time, prediction of results of games in a certain period of time is possible (all data is fetched from API). There is also a possibility to predict results of games with manually inserted data.
-[x] Prediction of standings after games played in given time period (useful for prediction of standings after the season)
+
+- [x] **Prediction of standings after games played in given time period** (useful for prediction of standings after the season)
+
 This is basically an extension of previous functionality, with the main difference being that output are not results, but a table. User can get a prediction of final standings after complete season of games.
-[x] Validate prediction
+
+- [x] **Validate prediction**
+
 Returns the output of Classification.Evaluation method (implemented in ML .NET library) for the trained model. Available data contains LogLoss, LogLossReduction, MicroAccuracy and MacroAccuracy.
 
 
@@ -29,9 +34,9 @@ Fetching data from publicly available NHL API with help of documentation: https:
 
 ## Future improvements
 
-[ ] Use Yahoo Sports API
-[ ] Add React Frontend
-[ ] Add support for other sports
+- [ ] Use Yahoo Sports API
+- [ ] Add React Frontend
+- [ ] Add support for other sports
 
 ## Previously
 
