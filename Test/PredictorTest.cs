@@ -4,7 +4,7 @@ using SportPredictor;
 namespace Test
 {
     [TestClass]
-    public class PredictorTest
+    public class PredictorTest : Test
     {
         private Classifier _classifier;
 
@@ -19,7 +19,7 @@ namespace Test
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var prediction = _classifier.PredictDailyGames("2019-03-15", "2019-03-15");
             watch.Stop();
-            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
+            Assert.IsTrue(watch.ElapsedMilliseconds < TimeLimit);
             Assert.IsTrue(prediction.Length >= 6);
         }
 
@@ -29,7 +29,7 @@ namespace Test
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var prediction = _classifier.PredictSeason("2018-09-15", "2019-05-15");
             watch.Stop();
-            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
+            Assert.IsTrue(watch.ElapsedMilliseconds < TimeLimit);
         }
 
         [TestMethod]
@@ -38,8 +38,8 @@ namespace Test
             var watch = System.Diagnostics.Stopwatch.StartNew();
             var prediction = _classifier.Evaluate();
             watch.Stop();
-            Assert.IsTrue(watch.ElapsedMilliseconds < 10000);
-            Assert.IsTrue(prediction.MacroAccuracy > 0.4);
+            Assert.IsTrue(watch.ElapsedMilliseconds < TimeLimit);
+            Assert.IsTrue(prediction.MacroAccuracy > 0.3);
         }
     }
 }

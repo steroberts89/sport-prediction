@@ -1,15 +1,37 @@
-# README #
+# Prediction of results using ML .NET #
+Applying [ML.NET](https://dotnet.microsoft.com/apps/machinelearning-ai/ml-dotnet), a machine learning library by .NET Foundation, in prediction of sport results. Currently implemented to predict results of games in National Hockey League.
 
-Currently refactoring to implement ML.net on sport prediction
+## Currently implemented functionalities
+
+[x] Predict result of games
+After a model is trained for a certain period of time, prediction of results of games in a certain period of time is possible (all data is fetched from API). There is also a possibility to predict results of games with manually inserted data.
+[x] Prediction of standings after games played in given time period (useful for prediction of standings after the season)
+This is basically an extension of previous functionality, with the main difference being that output are not results, but a table. User can get a prediction of final standings after complete season of games.
+[x] Validate prediction
+Returns the output of Classification.Evaluation method (implemented in ML .NET library) for the trained model. Available data contains LogLoss, LogLossReduction, MicroAccuracy and MacroAccuracy.
+
+
+## Experimental validation
+No real formal methods of validation implemented yet, but (on a superficial level) both tests were run the prediction for NHL season 2018/2019, trained on season 2017/2018.
+#### Game prediction precision 
+*NOTE: Implemented using ML .NET's prediction evaluation method*
+- binary prediction (only W or L) had accuracy (micro and macro) around 0,63
+- multi class prediction (W, OTW, OTL and L) had Micro accuracy around 0,49 and Macro accuracy around 0,37
+#### Precision of seasonal prediction
+- out of top 10 teams in predicted standings, 9 actually finished in top 10
+- big difference between 1st and 2nd ranked team and the team name also correctly predicted
+
+## Architecture
+Currently consists of projects: Server, Prediction library and Test.
 
 ## Links
-
-Data endpoint: https://gitlab.com/dword4/nhlapi/blob/master/stats-api.md
+Fetching data from publicly available NHL API with help of documentation: https://gitlab.com/dword4/nhlapi/blob/master/stats-api.md
 
 ## Future improvements
 
-- [] Use Yahoo Sports API
-- [] Add other sports
+[ ] Use Yahoo Sports API
+[ ] Add React Frontend
+[ ] Add support for other sports
 
 ## Previously
 
